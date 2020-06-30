@@ -6,6 +6,10 @@ const SearchBar = ( { handleFilter, changeSortByLetter, changeSortByPrice, price
     <div>
 
       <strong>Sort by:</strong>
+      {/* <label>
+        <input type="radio" value="none" checked={letter} onChange={changeSortByLetter}/>
+        None
+      </label> */}
       <label>
         <input type="radio" value="Alphabetically" checked={letter} onChange={changeSortByLetter}/>
         Alphabetically

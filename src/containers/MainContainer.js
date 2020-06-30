@@ -63,8 +63,8 @@ class MainContainer extends Component {
     return this.state.stocks
   }
 
-  myPortfolioStocks = () => this.filterByType().filter(stock => stock.openForBusiness === false)
-  stocksAvailable = () => this.filterByType().filter(stock => stock.openForBusiness === true)
+  myPortfolioStocks = (array) => array.filter(stock => stock.openForBusiness === false)
+  stocksAvailable = (array) => array.filter(stock => stock.openForBusiness === true)
 
   render() {
     return (
@@ -79,12 +79,12 @@ class MainContainer extends Component {
           <div className="row">
             <div className="col-8">
 
-              <StockContainer buyOrSellStock={this.buyOrSellStock} stocks={this.stocksAvailable()}/>
+              <StockContainer buyOrSellStock={this.buyOrSellStock} stocks={this.stocksAvailable(this.sortStocksBy())}/>
 
             </div>
             <div className="col-4">
 
-              <PortfolioContainer buyOrSellStock={this.buyOrSellStock} stocks={this.myPortfolioStocks()}/>
+              <PortfolioContainer buyOrSellStock={this.buyOrSellStock} stocks={this.myPortfolioStocks(this.sortStocksBy())}/>
 
             </div>
           </div>

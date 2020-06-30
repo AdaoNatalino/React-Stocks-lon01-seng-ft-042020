@@ -3,8 +3,13 @@ import Stock from '../components/Stock'
 
 class StockContainer extends Component {
 
+  sayGoodbye = () => {
+    console.log("Goodbye");
+  }
+  
   renderStocks = () => this.props.stocks.map(stock => {
-    return <Stock 
+    return < Stock 
+    saySomething={this.sayGoodbye} 
     key={stock.ticker} 
     buyOrSellStock={this.props.buyOrSellStock} 
     stock={stock}/>
