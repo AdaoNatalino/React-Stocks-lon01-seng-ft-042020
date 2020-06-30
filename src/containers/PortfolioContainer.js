@@ -3,9 +3,7 @@ import Stock from '../components/Stock'
 
 class PortfolioContainer extends Component {
 
-  sayHello = () => {
-    console.log("hello");
-  }
+  sayHello = () => console.log("hello")
 
   renderStocks = () => this.props.stocks.map(stock => {
     return < Stock
@@ -14,7 +12,6 @@ class PortfolioContainer extends Component {
     buyOrSellStock={this.props.buyOrSellStock} 
     stock={stock}/>
   })
-  
 
   render() {
     return (
