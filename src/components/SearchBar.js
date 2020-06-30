@@ -1,6 +1,6 @@
 import React from 'react';
 
-const SearchBar = ( { handleFilter, changeSortByLetter, changeSortByPrice, price, letter } ) => {
+const SearchBar = ( { handleFilter, sortByLetter, sortByPrice, price, letter } ) => {
 
 
   return (
@@ -8,11 +8,11 @@ const SearchBar = ( { handleFilter, changeSortByLetter, changeSortByPrice, price
 
       <strong>Sort by:</strong>
       <label>
-        <input type="radio" value="Alphabetically" checked={letter} onChange={changeSortByLetter}/>
+        <input type="radio" value="Alphabetically" checked={letter} onChange={sortByLetter}/>
         Alphabetically
       </label>
       <label>
-        <input type="radio" value="Price" checked={price} onChange={changeSortByPrice}/>
+        <input type="radio" value="Price" checked={!letter} onChange={sortByPrice}/>
         Price
       </label>
       <br/>

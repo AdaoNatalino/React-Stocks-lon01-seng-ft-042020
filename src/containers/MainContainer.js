@@ -9,8 +9,9 @@ class MainContainer extends Component {
   state = {
     stocks: [],
     filter: "All",
-    sortByLetter: false,
-    sortByPrice: false
+    sortByLetter: true,
+    portfolioStocks: [],
+    // sortByPrice: false
   }
 
   componentDidMount = () => {
@@ -38,46 +39,62 @@ class MainContainer extends Component {
     this.setState( {filter: filter} )
   }
 
-  filterByType = () => { 
+  filterByType = (stocks) => { 
     const filter = this.state.filter
 
-    if (filter === "All") { return this.state.stocks 
-      } else {
-        return this.state.stocks.filter(stock => stock.type === filter)
-      }
+    if (filter === "All") { 
+      return stocks 
+    } else {
+      return stocks.filter(stock => stock.type === filter)
+    }
   }
 
-  changeSortByPrice = () => this.setState( { sortByPrice: !this.state.sortByPrice } )
-  changeSortByLetter = () => this.setState( { sortByLetter: !this.state.sortByLetter } )
+  sortByPrice = () => this.setState({
+    // sortByPrice: true,
+    sortByLetter: false,
+  })
 
-  sortStocksBy = () => {
-    if (this.state.sortByPrice) { return [...this.state.stocks].sort((a, b) => (a.price > b.price) ? 1 : -1) }
-    if (this.state.sortByLetter) { return [...this.state.stocks].sort((a, b) => (a.name > b.name) ? 1 : -1) }
-    return this.state.stocks
+  sortByLetter = () => this.setState({
+    sortByLetter: true,
+    // sortByPrice: false,
+  })
+
+  sortStocksBy = (stocks) => {
+    return this.state.sortByLetter 
+    ? [...stocks].sort((a, b) => (a.name > b.name) ? 1 : -1)
+    : [...stocks].sort((a, b) => (a.price > b.price) ? 1 : -1) 
+    
   }
 
-  myPortfolioStocks = () => this.filterByType().filter(stock => stock.openForBusiness === false)
+  stocksToRender = (stocks) => {
+    const filteredStocks = this.filterByType(stocks)
+    const sortedAndFilteredStocks = this.sortStocksBy(filteredStocks)
+    return sortedAndFilteredStocks
+
+  }
+
+  myPortfolioStocks = () => this.filterByType(this.state.stocks).filter(stock => stock.openForBusiness === false)
   stocksAvailable = () => this.filterByType().filter(stock => stock.openForBusiness === true)
 
   render() {
     return (
       <div>
         <SearchBar
-        price={this.state.sortByPrice}
+        //price={this.state.sortByPrice}
         letter={this.state.sortByLetter}
-        changeSortByLetter={this.changeSortByLetter}
-        changeSortByPrice={this.changeSortByPrice} 
+        sortByLetter={this.sortByLetter}
+        sortByPrice={this.sortByPrice} 
         handleFilter={this.handleFilter}/>
 
           <div className="row">
             <div className="col-8">
 
-              <StockContainer buyOrSellStock={this.buyOrSellStock} stocks={this.stocksAvailable()}/>
+              <StockContainer buyOrSellStock={this.buyOrSellStock} stocks={this.stocksToRender(this.state.stocks)}/>
 
             </div>
             <div className="col-4">
 
-              <PortfolioContainer buyOrSellStock={this.buyOrSellStock} stocks={this.myPortfolioStocks()}/>
+              <PortfolioContainer buyOrSellStock={this.buyOrSellStock} stocks={this.stocksToRender(this.state.portfolioStocks)}/>
 
             </div>
           </div>

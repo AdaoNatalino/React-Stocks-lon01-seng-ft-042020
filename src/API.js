@@ -7,3 +7,9 @@ const getAllStocks = () => {
 }
 
 export default { getAllStocks }
+
+export const someVariable = "some value"
+export const someFunction = () => {
+    // does stuff
+}
+
