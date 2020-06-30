@@ -2,7 +2,6 @@ import React from 'react';
 
 const SearchBar = ( { handleFilter, changeSortByLetter, changeSortByPrice, price, letter } ) => {
 
-
   return (
     <div>
 

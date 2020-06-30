@@ -47,8 +47,15 @@ class MainContainer extends Component {
       }
   }
 
-  changeSortByPrice = () => this.setState( { sortByPrice: !this.state.sortByPrice } )
-  changeSortByLetter = () => this.setState( { sortByLetter: !this.state.sortByLetter } )
+  changeSortByPrice = () => this.setState( { 
+    sortByPrice: true,
+    sortByLetter: false
+  } )
+
+  changeSortByLetter = () => this.setState( { 
+    sortByPrice: false,
+    sortByLetter: true
+   } )
 
   sortStocksBy = () => {
     if (this.state.sortByPrice) { return [...this.state.stocks].sort((a, b) => (a.price > b.price) ? 1 : -1) }
