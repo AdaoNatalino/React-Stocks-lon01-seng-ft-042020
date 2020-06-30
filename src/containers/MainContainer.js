@@ -10,7 +10,7 @@ class MainContainer extends Component {
     stocks: [],
     filter: "All",
     sortByLetter: true,
-    portfolioStocks: [],
+    // portfolioStocks: [],
     // sortByPrice: false
   }
 
@@ -64,6 +64,9 @@ class MainContainer extends Component {
     ? [...stocks].sort((a, b) => (a.name > b.name) ? 1 : -1)
     : [...stocks].sort((a, b) => (a.price > b.price) ? 1 : -1) 
     
+    // if (this.state.sortByPrice) { return [...this.state.stocks].sort((a, b) => (a.price > b.price) ? 1 : -1) }
+    // if (this.state.sortByLetter) { return [...this.state.stocks].sort((a, b) => (a.name > b.name) ? 1 : -1) }
+    // return this.state.stocks
   }
 
   stocksToRender = (stocks) => {
